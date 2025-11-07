@@ -35,3 +35,8 @@ set_option pp.fieldNotation.generalized false
 -- `example` は命題に名前をつけずに証明するためのコマンド。
 example : MyNat.add .one .one = .two := by
     rfl
+
+-- zeroを右から足しても変わらない
+example (n : MyNat) : MyNat.add n .zero = n := by
+    rw [MyNat.add] -- これでも証明が通るけど、 `rfl` でも通る
+    --rfl

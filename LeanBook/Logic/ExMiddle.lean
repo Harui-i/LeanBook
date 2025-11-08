@@ -25,10 +25,27 @@ example (P: Prop) : ¬¬ P → P := by
     contradiction
 
 
+-- ド・モルガンの法則の→を示すときの、教科書がした証明
+example (P Q : Prop) : ¬(P ∧ Q) → ¬ P ∨ ¬ Q := by
+  intro hnpq
+  by_cases h : P
+  ·
+    -- h : P
+    right
+    -- goal: ¬Q
+    intro hq -- hq: Q
+    -- have h3 : P∧Q := And.intro h hq
+    -- みたいにやるわけじゃないんだ。 無名コンストラクタを使うと便利なのか
+    exact hnpq ⟨h, hq⟩
+  ·
+    left
+    exact h
+
 /-- ド・モルガンの法則-/
 example (P Q : Prop) : ¬(P ∧ Q) ↔ ¬ P ∨ ¬ Q := by
   constructor
   ·
+
     intro h1
     -- h1: ¬(P ∧ Q)
     -- P ∧ Q → False

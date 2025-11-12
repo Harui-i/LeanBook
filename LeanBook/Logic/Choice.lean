@@ -35,7 +35,6 @@ theorem double_negation_of_contra_equiv (P: Prop)
   intro hnnp
   -- ¬¬P
   -- ¬(P → False)
-
   -- (¬P → False)
   -- ↓対偶をつかう
   -- (True → P)
@@ -57,3 +56,21 @@ theorem double_negation_of_contra_equiv (P: Prop)
   exact h_np_imp_false h_true
 
 #print axioms double_negation_of_contra_equiv
+
+-- 演習の解答をみた
+-- 結局simpを使うのは同じだけど、rw [show Q from by simp] at h1 みたいな書き方で省略してる
+example (P: Prop)
+  (contra_equiv : ∀ (P Q : Prop), (¬P → ¬ Q) ↔ (Q → P)) : ¬¬P → P := by
+
+  have := contra_equiv P True
+  -- this : ¬P → ¬True ↔ True → P
+  rw [show ¬True ↔ False from by simp] at this
+  -- this: ¬P → False ↔ True → P
+  rw [show (True → P) ↔ P from by simp] at this
+  -- this : ¬P → False ↔ P
+  rw [show (¬P → False) ↔ ¬¬P from by simp] at this
+  -- this: ¬¬P ↔ P
+  rw [this]
+  -- goal: P → P
+  intro hp
+  assumption

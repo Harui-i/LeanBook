@@ -8,10 +8,14 @@ import LeanBook.NatCommMonoid.TypeClass
 
 set_option pp.fieldNotation.generalized false
 
+-- これを Simp.leanで必要とするので
+theorem MyNat.add_zero (n : MyNat) : n + 0 = n := by
+  rfl
+
 theorem MyNat.add_succ (m n : MyNat) : m + MyNat.succ n = MyNat.succ (m + n) := by
   rfl
 
-example (n : MyNat) : 0 + n = n := by
+theorem MyNat.zero_add (n : MyNat) : 0 + n = n := by
   induction n with
   | zero =>
     -- goal : 0 + MyNat.zero = 0

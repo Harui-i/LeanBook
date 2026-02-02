@@ -1,5 +1,5 @@
 -- 6.2 順序を定義する
-import LeanBook.NatOder.AddCancel
+import LeanBook.NatOrder.AddCancel
 
 -- 6.2.1 順序関係を帰納的に定義する
 
